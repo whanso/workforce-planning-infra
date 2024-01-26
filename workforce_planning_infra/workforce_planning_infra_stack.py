@@ -40,7 +40,7 @@ class WorkforcePlanningInfraStack(Stack):
         bucket = s3.Bucket(
             self,
             "WorkforcePlanningInfraBucket",
-            bucket_name="WorkforcePlanningInfraBucket",
+            bucket_name="workforce-planning-infra-bucket",
             public_read_access=True,
             block_public_access=s3.BlockPublicAccess(
                 block_public_acls=False,
@@ -55,6 +55,6 @@ class WorkforcePlanningInfraStack(Stack):
         s3_deployment.BucketDeployment(
             self,
             "StaticWebsite",
-            sources=[s3_deployment.Source.asset("./react-ts/build")],
+            sources=[s3_deployment.Source.asset("./react-ts/dist")],
             destination_bucket=bucket,
         )
