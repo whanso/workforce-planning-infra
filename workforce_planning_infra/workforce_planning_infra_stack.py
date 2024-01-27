@@ -30,19 +30,20 @@ class WorkforcePlanningInfraStack(Stack):
                 allow_methods=apigateway.Cors.ALL_METHODS,
                 allow_headers=["*"],
             ),
+            disable_execute_api_endpoint=True,  # remove when ready to test
         )
 
         bucket = s3.Bucket(
             self,
             "WorkforcePlanningInfraBucket",
             bucket_name="workforce-planning-infra-bucket",
-            public_read_access=True,
-            block_public_access=s3.BlockPublicAccess(
-                block_public_acls=False,
-                block_public_policy=False,
-                ignore_public_acls=False,
-                restrict_public_buckets=False,
-            ),
+            # public_read_access=True,
+            # block_public_access=s3.BlockPublicAccess(
+            #     block_public_acls=False,
+            #     block_public_policy=False,
+            #     ignore_public_acls=False,
+            #     restrict_public_buckets=False,
+            # ),
             access_control=s3.BucketAccessControl.BUCKET_OWNER_FULL_CONTROL,
             website_index_document="index.html",
         )
